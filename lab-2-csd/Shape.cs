@@ -4,20 +4,18 @@ using System.Text;
 
 namespace lab_2_csd
 {
-    public class Shape
+    public abstract class Shape
     {
-        int xCoordinate;
-        int yCoordinate;
-        int circumference;
-        int instancePoints;
-        int typePoints;
-
-        public Shape(int xCoordinate, int yCoordinate, int circumference, int instancePoints)
+        public int xCoordinate { get; set; }
+        public int yCoordinate { get; set; }
+        public int circumference { get; set; }
+        public int instancePoints { get; set; }
+        public int typePoints { get; set; }
+        public abstract double Area();
+        public abstract bool isPointInside(Point point);
+        public double ShapeScore()
         {
-            this.xCoordinate = xCoordinate;
-            this.yCoordinate = yCoordinate;
-            this.circumference = circumference;
-            this.instancePoints = instancePoints;
+            return (this.typePoints * this.instancePoints) / Area();
         }
     }
 }
