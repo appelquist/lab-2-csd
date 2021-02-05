@@ -19,8 +19,6 @@ namespace lab_2_csd
         {
             double hitScore = 0;
             double missScore = 0;
-            Console.WriteLine(this.xCoordinate);
-            Console.WriteLine(this.yCoordinate);
 
             foreach (Shape shape in shapes)
             {

@@ -24,11 +24,11 @@ namespace lab_2_csd
         {
             int side = this.circumference / 4;
 
-            double bottomleftX = this.xCoordinate - (side/2);
-            double bottomLeftY = this.yCoordinate - (side / 2);
-            double topLeftY = this.yCoordinate + (side / 2);
-            double bottomRightX = this.xCoordinate + (side / 2);
-            double bottomRightY = this.xCoordinate - (side / 2);
+            double bottomleftX = this.xCoordinate - ((double) side/2);
+            double bottomLeftY = this.yCoordinate - ((double) side / 2);
+            double topLeftY = this.yCoordinate + ((double) side / 2);
+            double bottomRightX = this.xCoordinate + ((double) side / 2);
+            double bottomRightY = this.xCoordinate - ((double) side / 2);
 
             if (point.xCoordinate > bottomleftX && point.xCoordinate < bottomRightX && point.yCoordinate > bottomLeftY && point.yCoordinate < topLeftY)
             {
