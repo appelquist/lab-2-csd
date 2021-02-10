@@ -56,19 +56,29 @@ namespace lab_2_csd
                 try
                 {
                     csvShapes.Trim('"');
+
                     string[] rows = csvShapes.Split(';');
+                    string[] headers = rows[0].Split(",");
+
+                    int shapeIndex = Array.IndexOf(headers, "SHAPE");
+                    int xIndex = Array.IndexOf(headers, "X");
+                    int yIndex = Array.IndexOf(headers, "Y");
+                    int lengthIndex = Array.IndexOf(headers, "LENGTH");
+                    int pointsIndex = Array.IndexOf(headers, "POINTS");
+
                     rows = rows.Skip(1).ToArray();
+
                     foreach (string row in rows)
                     {
                         if (row == "") { break; }
 
                         string[] values = row.Split(",");
 
-                        string shape = values[0].Trim(' ');
-                        int x = Convert.ToInt32(values[1]);
-                        int y = Convert.ToInt32(values[2]);
-                        int length = Convert.ToInt32(values[3]);
-                        int points = Convert.ToInt32(values[4]);
+                        string shape = values[shapeIndex].Trim(' ');
+                        int x = Convert.ToInt32(values[xIndex]);
+                        int y = Convert.ToInt32(values[yIndex]);
+                        int length = Convert.ToInt32(values[lengthIndex]);
+                        int points = Convert.ToInt32(values[pointsIndex]);
                         if (shape == "CIRCLE")
                         {
                             shapes.Add(new Circle(x, y, length, points));
