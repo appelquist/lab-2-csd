@@ -10,7 +10,6 @@ namespace lab_2_csd
         
         static int Main(string[] args)
         {
-            Console.WriteLine(args[0]);
             if (args.Length != 2)
             {
                 Console.WriteLine("Please provide two arguments.");
@@ -21,12 +20,16 @@ namespace lab_2_csd
             List<Shape> shapes = new List<Shape>();
             Point guess;
             string shapesInput = args[0];
-            int xInput = Convert.ToInt32(args[1][0]);
-            int yInput = Convert.ToInt32(args[1][1]);
-            string[] coordinates = args[1].Split(' ');
 
             try
             {
+                string[] coordinates = args[1].Split(',');
+                coordinates[0] = coordinates[0].Trim('(');
+                coordinates[0] = coordinates[0].Trim(')');
+                coordinates[0] = coordinates[0].Trim(' ');
+                coordinates[1] = coordinates[1].Trim('(');
+                coordinates[1] = coordinates[1].Trim(')');
+                coordinates[1] = coordinates[1].Trim(' ');
                 guess = new Point(Convert.ToInt32(coordinates[0]), Convert.ToInt32(coordinates[1]));
             }
             catch
