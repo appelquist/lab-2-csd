@@ -2,7 +2,7 @@
   "profiles": {
     "lab-2-csd": {
       "commandName": "Project",
-      "commandLineArgs": "\"(1,   0)\" \"SHAPE,X,Y,LENGTH       ,POINTS; CIRCLE ,3,1,13,100 ; CIRCLE, 1,-1,15 ,       200;SQUARE,-1,0,20,300;SQUARE,-3,2,8,400;\""
+      "commandLineArgs": "\"(1,   0)\" \"SHAPE,X,Y,LENGTH       ,POINTS;CIRCLE,3,1,13,100 ; CIRCLE, 1,-1,15 ,     200;SQUARE,-1,0,20,300;SQUARE,-3,2,8,400;\""
     }
   }
 }
