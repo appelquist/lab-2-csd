@@ -14,7 +14,6 @@ namespace lab_2_csd
             this.xCoordinate = xCoordinate;
             this.yCoordinate = yCoordinate;
         }
-
         public int Score(List<Shape> shapes)
         {
             double hitScore = 0;

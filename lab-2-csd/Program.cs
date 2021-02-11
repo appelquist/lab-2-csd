@@ -7,23 +7,25 @@ namespace lab_2_csd
 {
     class Program
     {
-        
+
         static int Main(string[] args)
         {
+            //Check that there are 2 arguments provided
             if (args.Length != 2)
             {
                 Console.WriteLine("Please provide two arguments.");
-                Console.WriteLine("Usage: dotnet run <shapes (x-coordinate(int), y-coordinate(int))>");
+                Console.WriteLine("Usage: dotnet run (x-coordinate(int), y-coordinate(int))  \"SHAPE,X,Y,LENGTH,POINTS;CIRCLE,1,2,30,100 \"");
                 return 1;
             }
 
             List<Shape> shapes = new List<Shape>();
             Point guess;
-            string shapesInput = args[0];
+            string shapesInput = args[1];
 
+            //Try to extract the X and Y coordinate from args and instantiate a new Point with those coordinates
             try
             {
-                string[] coordinates = args[1].Split(',');
+                string[] coordinates = args[0].Split(',');
                 coordinates[0] = coordinates[0].Trim('(');
                 coordinates[0] = coordinates[0].Trim(')');
                 coordinates[0] = coordinates[0].Trim(' ');
@@ -35,67 +37,78 @@ namespace lab_2_csd
             catch
             {
                 Console.WriteLine("Point in wrong format.");
-                Console.WriteLine("Usage: dotnet run <shapes, (x-coordinate(int), y-coordinate(int))>");
+                Console.WriteLine("Usage: dotnet run (x-coordinate(int), y-coordinate(int))  shapes");
                 return 1;
             }
 
-            if (!AddShapes(shapesInput))
+            //Try to add the shapes from args to the List shapes
+            try
             {
-                Console.WriteLine("Please provide shapes in csv format");
-                Console.WriteLine("Usage: dotnet run <\"SHAPE,X,Y,LENGTH,POINTS;CIRCLE,3,1,13,100;\", (x-coordinate(int), y-coordinate(int)");
+                AddShapes(shapesInput, shapes);
+            }
+            catch
+            {
+                Console.WriteLine("Shapes in wrong format");
+                Console.WriteLine("Usage: dotnet run (x-coordinate(int), y-coordinate(int))  \"SHAPE,X,Y,LENGTH,POINTS;CIRCLE,1,2,30,100 \"");
                 return 1;
             }
-
 
             Console.WriteLine("Your score: " + guess.Score(shapes));
 
             return 0;
 
-            bool AddShapes(string csvShapes)
+            //Method that creates shapes and adds them to a List of Shapes
+            void AddShapes(string csvShapes, List<Shape> shapes)
             {
-                try
+
+                string[] rows = csvShapes.Split(';');
+                string[] headers = rows[0].Split(",");
+
+                RemoveSpaces(headers);
+
+                //Get the index of every header
+                int shapeIndex = Array.IndexOf(headers, "SHAPE");
+                int xIndex = Array.IndexOf(headers, "X");
+                int yIndex = Array.IndexOf(headers, "Y");
+                int lengthIndex = Array.IndexOf(headers, "LENGTH");
+                int pointsIndex = Array.IndexOf(headers, "POINTS");
+
+                rows = rows.Skip(1).ToArray();
+
+                foreach (string row in rows)
                 {
-                    csvShapes.Trim('"');
+                    if (row == "") { break; }
 
-                    string[] rows = csvShapes.Split(';');
-                    string[] headers = rows[0].Split(",");
+                    string[] values = row.Split(",");
 
-                    int shapeIndex = Array.IndexOf(headers, "SHAPE");
-                    int xIndex = Array.IndexOf(headers, "X");
-                    int yIndex = Array.IndexOf(headers, "Y");
-                    int lengthIndex = Array.IndexOf(headers, "LENGTH");
-                    int pointsIndex = Array.IndexOf(headers, "POINTS");
+                    RemoveSpaces(values);
 
-                    rows = rows.Skip(1).ToArray();
+                    //Use the index of every header in order to get the correct value
+                    string shape = values[shapeIndex];
+                    int x = Convert.ToInt32(values[xIndex]);
+                    int y = Convert.ToInt32(values[yIndex]);
+                    int length = Convert.ToInt32(values[lengthIndex]);
+                    int points = Convert.ToInt32(values[pointsIndex]);
 
-                    foreach (string row in rows)
+                    if (shape == "CIRCLE")
                     {
-                        if (row == "") { break; }
-
-                        string[] values = row.Split(",");
-
-                        string shape = values[shapeIndex].Trim(' ');
-                        int x = Convert.ToInt32(values[xIndex]);
-                        int y = Convert.ToInt32(values[yIndex]);
-                        int length = Convert.ToInt32(values[lengthIndex]);
-                        int points = Convert.ToInt32(values[pointsIndex]);
-                        if (shape == "CIRCLE")
-                        {
-                            shapes.Add(new Circle(x, y, length, points));
-                        }
-                        if (shape == "SQUARE")
-                        {
-                            shapes.Add(new Square(x, y, length, points));
-                        }
+                        shapes.Add(new Circle(x, y, length, points));
+                    }
+                    if (shape == "SQUARE")
+                    {
+                        shapes.Add(new Square(x, y, length, points));
                     }
                 }
-                catch
+            }
+
+            void RemoveSpaces(string[] arr)
+            {
+                for (int i = 0; i < arr.Length; i++)
                 {
-                    return false;
+                    arr[i] = arr[i].Trim(' ');
                 }
-                return true;
             }
         }
-        
+
     }
 }
