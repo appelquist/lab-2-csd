@@ -9,7 +9,6 @@ namespace lab_2_csd
     {
         private List<Shape> shapes = new List<Shape>();
         private Point guess;
-
         public HitShapesGame(string point, string csvShapes)
         {
             try
@@ -35,9 +34,7 @@ namespace lab_2_csd
             {
                 throw new Exception("Shapes in wrong format");
             }
-            
         }
-
         public int Score()
         {
             double hitScore = 0;
@@ -62,6 +59,7 @@ namespace lab_2_csd
             string[] rows = csvShapes.Split(';');
             string[] headers = rows[0].Split(",");
 
+            //Remove spaces
             for (int i = 0; i < headers.Length; i++)
             {
                 headers[i] = headers[i].Trim(' ');
@@ -74,6 +72,7 @@ namespace lab_2_csd
             int lengthIndex = Array.IndexOf(headers, "LENGTH");
             int pointsIndex = Array.IndexOf(headers, "POINTS");
 
+            //Skip the header row in csvShapes
             rows = rows.Skip(1).ToArray();
 
             foreach (string row in rows)
@@ -82,6 +81,7 @@ namespace lab_2_csd
 
                 string[] values = row.Split(",");
 
+                //Remove spaces
                 for (int i = 0; i < values.Length; i++)
                 {
                     values[i] = values[i].Trim(' ');

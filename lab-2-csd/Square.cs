@@ -14,7 +14,6 @@ namespace lab_2_csd
             this.instancePoints = instancePoints;
             this.typePoints = 1;
         }
-
         public override double Area()
         {
             double area = Math.Pow(this.circumference / 4, 2);

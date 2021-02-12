@@ -8,7 +8,6 @@ namespace lab_2_csd
     {
         public int xCoordinate { get; private set; }
         public int yCoordinate { get; private set; }
-
         public Point(int xCoordinate, int yCoordinate)
         {
             this.xCoordinate = xCoordinate;

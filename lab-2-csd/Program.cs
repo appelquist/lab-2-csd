@@ -12,7 +12,6 @@ namespace lab_2_csd
         {
             HitShapesGame game;
 
-            //Check that there are 2 arguments provided
             if (args.Length != 2)
             {
                 Console.WriteLine("Please provide two arguments.");
@@ -35,7 +34,6 @@ namespace lab_2_csd
             }
 
             Console.WriteLine("Your score: " + game.Score());
-
             return 0;
         }
     }

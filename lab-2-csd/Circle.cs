@@ -14,13 +14,11 @@ namespace lab_2_csd
             this.instancePoints = instancePoints;
             this.typePoints = 2;
         }
-
         public override double Area()
         {
             double area = (Math.Pow(this.circumference, 2)) / (Math.PI * 4);
             return area;
         }
-
         public override bool isPointInside(Point point)
         {
             double radius = this.circumference / (2 * Math.PI);
@@ -37,7 +35,6 @@ namespace lab_2_csd
                 return true;
             }
             else return false;
-
         }
     }
 }
